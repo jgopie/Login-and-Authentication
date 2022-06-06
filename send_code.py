@@ -2,8 +2,8 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-test_email = "apikey"
-test_email_password = "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"
+test_email = {{email}}
+test_email_password = {{send_grid_api_key}}
 
 
 def send_code(code, user_email):
