@@ -22,4 +22,5 @@ def login():
             return render_template("secret.html")
         else:
             flash("Invalid Credentials")
-    return render_template("login.html")
+    else:
+        return render_template("login.html")

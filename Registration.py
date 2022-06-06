@@ -13,4 +13,5 @@ def home():
         new_user = User(email=user_email, password=salted_password)
         create_user(new_user)
         return redirect(url_for("login"))
-    return render_template("index.html")
+    else:
+        return render_template("index.html")
