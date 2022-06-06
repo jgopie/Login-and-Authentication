@@ -1,5 +1,5 @@
 from __main__ import app, login_manager
-from flask import render_template, request, redirect, flash
+from flask import render_template, request, redirect, flash, url_for
 from users import User
 from werkzeug.security import check_password_hash
 from flask_login import login_user
@@ -17,10 +17,11 @@ def login():
         user_password = request.form["password"]
         user_info = User.query.filter_by(email=user_email).first()
         check_pass = check_password_hash(user_info.password, user_password)
-        if check_pass:
+        if check_pass and user_info.verified == True:
             login_user(user_info)
             return render_template("secret.html")
         else:
             flash("Invalid Credentials")
+            return redirect(url_for("login"))
     else:
         return render_template("login.html")

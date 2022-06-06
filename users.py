@@ -3,12 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 import random
 from datetime import datetime
+from send_code import send_code
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///user_info.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
-
-
 
 
 class User(UserMixin, db.Model):
@@ -18,11 +17,19 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(200), unique=True, nullable=False)
     code = db.Column(db.String(6), unique=False, nullable=False)
     creation_time = db.Column(db.String(20), unique=False, nullable=False)
+    verified = db.Column(db.Boolean(0), unique=False, nullable=False)
+
 
 # db.create_all()
-def create_user(email, password):
+def create_user(email, password, verified):
     code = "".join([str(random.randint(0, 9)) for _ in range(0, 6)])
     time_of_creation = (datetime.now()).strftime("%d/%m/%Y %H:%M:%S")
-    new_user = User(email=email, password=password, code=code, creation_time=time_of_creation)
+    new_user = User(email=email, password=password, code=code, creation_time=time_of_creation, verified=verified)
     db.session.add(new_user)
+    db.session.commit()
+    send_code(code, email)
+
+
+def verify_user(user):
+    user.verified = True
     db.session.commit()

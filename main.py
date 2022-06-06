@@ -10,6 +10,7 @@ login_manager.init_app(app)
 
 import Registration
 import Login
+import Verification
 
 if __name__ == "__main__":
     app.run(debug=True)
