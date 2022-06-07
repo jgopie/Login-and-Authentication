@@ -11,6 +11,6 @@ def home():
         user_password = request.form["password"]
         salted_password = generate_password_hash(password=user_password, method="pbkdf2:sha256", salt_length=8)
         create_user(email=user_email, password=salted_password, verified=False)
-        return redirect(url_for("verify"))
+        return redirect(url_for("verify", user_email=user_email))
     else:
         return render_template("index.html")

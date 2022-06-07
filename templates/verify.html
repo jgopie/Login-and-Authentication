@@ -88,15 +88,11 @@
   <body class="text-center">
 
 <main class="form-signin w-100 m-auto">
-  <form action = "/verify" method="post">
+  <form action = "/verify/<user_email>" method="post">
     <h1 class="h3 mb-3 fw-normal">Please Enter your Verification Code</h1>
     <div class="form-floating">
-      <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
-    </div>
-    <div class="form-floating">
       <input type="text" name="code" class="form-control" id="floatingPassword" placeholder="name@example.com">
-      <label for="floatingInput">Verification Code</label>
+      <label for="floatingPassword">Verification Code</label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Verify</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
