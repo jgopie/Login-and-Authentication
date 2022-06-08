@@ -3,10 +3,10 @@ from flask import render_template, request, flash, redirect, url_for
 from users import User, verify_user
 
 
-@app.route("/verify/<user_email>", methods=["GET", "POST"])
+@app.route("/verify/<string:user_email>", methods=["GET", "POST"])
 def verify(user_email):
     if request.method == "POST":
-        email = user_email
+        email = str(user_email)
         code = request.form["code"]
         user_info = User.query.filter_by(email=email).first()
         user_code = user_info.code
@@ -16,4 +16,4 @@ def verify(user_email):
         else:
             flash("Incorrect code")
     else:
-        return render_template("verify.html")
+        return render_template("verify.html", user_email=str(user_email))
