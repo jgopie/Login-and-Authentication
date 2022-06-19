@@ -18,9 +18,15 @@ class User(UserMixin, db.Model):
     code = db.Column(db.String(6), unique=False, nullable=False)
     creation_time = db.Column(db.String(20), unique=False, nullable=False)
     verified = db.Column(db.Boolean(0), unique=False, nullable=False)
+    phone_number = db.Column(db.String(20), unique=False, nullable=True)
+    address = db.Column(db.String(50), unique=False, nullable=True)
+    user_name = db.Column(db.String(10), unique=False, nullable=True)
+    registration_complete = db.Column(db.Boolean(0), unique=False, nullable=True)
 
 
 # db.create_all()
+
+
 def create_user(email, password, verified):
     code = "".join([str(random.randint(0, 9)) for _ in range(0, 6)])
     time_of_creation = (datetime.now()).strftime("%d/%m/%Y %H:%M:%S")
@@ -32,4 +38,12 @@ def create_user(email, password, verified):
 
 def verify_user(user):
     user.verified = True
+    db.session.commit()
+
+
+def complete_user_registration(user, user_name, address, phone_number, registration_complete):
+    user.user_name = user_name
+    user.address = address
+    user.phone_number = phone_number
+    user.registration_complete = registration_complete
     db.session.commit()
