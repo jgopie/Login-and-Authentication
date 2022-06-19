@@ -33,3 +33,8 @@ def login():
 def logout():
     session.pop("user_email", None)
     return redirect(url_for("login"))
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect(url_for("login"))
