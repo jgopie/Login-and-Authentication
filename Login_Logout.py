@@ -21,6 +21,8 @@ def login():
         if check_pass and user_info.verified == True:
             login_user(user_info)
             session.permanent = True
+            if user_info.registration_complete:
+                return redirect(url_for("view_profile", user_name=user_info.user_name))
             return redirect(url_for("register", user_email=user_email))
         else:
             flash("Invalid Credentials")
@@ -32,4 +34,8 @@ def login():
 @app.route("/logout")
 def logout():
     session.pop("user_email", None)
+    return redirect(url_for("login"))
+
+@login_manager.unauthorized_handler
+def unauthorized():
     return redirect(url_for("login"))

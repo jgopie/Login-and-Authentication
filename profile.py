@@ -4,8 +4,8 @@ from __main__ import app
 from users import User
 
 
-@app.route("/profile/<user_email>")
+@app.route("/profile/<user_name>")
 @login_required
-def view_profile(user_email):
-    user_info = User.query.filter_by(email=user_email).first()
+def view_profile(user_name):
+    user_info = User.query.filter_by(user_name=user_name).first()
     return render_template("profile.html", user_name=user_info.user_name, phone_number=user_info.phone_number, address=user_info.address)

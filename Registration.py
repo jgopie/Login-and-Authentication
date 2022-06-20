@@ -27,7 +27,7 @@ def register(user_email):
         address = request.form["address"]
         registration_complete = True
         complete_user_registration(user=user_info, user_name=user_name, address=address, phone_number=phone_number, registration_complete=registration_complete)
-        return redirect(url_for("view_profile", user_email=user_email))
+        return redirect(url_for("view_profile", user_name=user_name))
     else:
         return render_template("complete_registration.html", user_email=str(user_email))
 
