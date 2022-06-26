@@ -12,6 +12,9 @@ import Registration
 import Login_Logout
 import Verification
 import profile
+from users import db
+import converter
 
 if __name__ == "__main__":
+    db.create_all()
     app.run(debug=True)

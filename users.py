@@ -5,7 +5,7 @@ import random
 from datetime import datetime
 from send_code import send_code
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///user_info.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:password@localhost:5432/user_info"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
@@ -22,9 +22,6 @@ class User(UserMixin, db.Model):
     address = db.Column(db.String(50), unique=False, nullable=True)
     user_name = db.Column(db.String(10), unique=False, nullable=True)
     registration_complete = db.Column(db.Boolean(0), unique=False, nullable=True)
-
-
-# db.create_all()
 
 
 def create_user(email, password, verified):

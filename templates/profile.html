@@ -15,6 +15,10 @@
         <p>User Name: {{user_name}}</p>
         <p>Phone Number: {{phone_number}}</p>
         <p>Address: {{address}}</p>
+        <h2>Convert your CSV to PDF</h2>
+        <form action="/converter" method="post" enctype="multipart/form-data">
+            <button type="submit">Submit</button>
+        </form>
     </div>
 </body>
 </html>
